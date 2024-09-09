@@ -32,6 +32,16 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
+/* Uncomment for dark mode if needed */
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
+
+/* Global styles */
+body {
+    background-color: #ffffff; /* Fondo blanco global */
+    color: #000000; /* Texto negro global */
+    font-family: 'Roboto', sans-serif; /* Aplicar la fuente Roboto */
+}
+
+/* Additional global styles can be added here */

@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouteReuseStrategy } from '@angular/router';
-import { GoogleMapsModule } from '@angular/google-maps'; // Importa GoogleMapsModule
+import { GoogleMapsModule } from '@angular/google-maps';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Importa BrowserAnimationsModule
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SplashScreenModule } from './splash-screen/splash-screen.module';
 
 @NgModule({
   declarations: [
-    AppComponent
-    // otros componentes si los tienes
+    AppComponent,
+    // Aquí puedes agregar otros componentes si los hay
   ],
   imports: [
     BrowserModule,
@@ -19,11 +21,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
     AppRoutingModule,
     GoogleMapsModule,
     HttpClientModule,
-    BrowserAnimationsModule 
+    BrowserAnimationsModule,
+    SplashScreenModule,
+    FormsModule // Asegúrate de incluir FormsModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-    // otros proveedores si los tienes
   ],
   bootstrap: [AppComponent]
 })

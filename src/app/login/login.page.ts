@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { trigger, state, style, animate, transition } from '@angular/animations'; // Importa las animaciones
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +30,6 @@ export class LoginPage implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    // Código para forzar el redibujado del elemento después de la inicialización
     setTimeout(() => {
       const container = document.querySelector('.login-container');
       if (container) {
@@ -40,13 +39,17 @@ export class LoginPage implements OnInit {
   }
 
   onLogin() {
-    console.log('onLogin called'); // Depura aquí
     this.error = '';
 
-    this.authService.login(this.email, this.password).subscribe(success => {
-      console.log('Login response:', success); // Depura aquí
-      if (success) {
-        this.router.navigate(['/inicio']); // Redirige a la página 'inicio'
+    this.authService.login(this.email, this.password).subscribe(response => {
+      if (response.success) {
+        if (response.role === 'conductor') {
+          this.router.navigate(['/conductor-dashboard']);
+        } else if (response.role === 'pasajero') {
+          this.router.navigate(['/pasajero-dashboard']);
+        } else {
+          this.error = 'Rol de usuario no reconocido.';
+        }
       } else {
         this.error = 'Credenciales inválidas';
       }

@@ -1,7 +1,15 @@
+<!-- Pantalla de presentación -->
+<app-splash-screen *ngIf="showSplash"></app-splash-screen>
+
+
+
+
+<!-- Menú lateral -->
 <ion-menu contentId="main-content">
   <ion-header>
     <ion-toolbar>
       <ion-img src="assets/icon/PickMeUpLogoP-removebg-preview.png" class="logo"></ion-img>
+      <ion-title class="menu-title">PickMeUp</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -22,4 +30,5 @@
   </ion-content>
 </ion-menu>
 
+<!-- Contenedor principal de la aplicación -->
 <ion-router-outlet id="main-content"></ion-router-outlet>

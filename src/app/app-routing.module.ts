@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
-// Importa los módulos para las páginas
-import { ConductorDashboardModule } from './conductor-dashboard/conductor-dashboard.module';
-import { PasajeroDashboardModule } from './pasajero-dashboard/pasajero-dashboard.module';
-import { SeleccionAutoModule } from './seleccion-auto/seleccion-auto.module'; // Importa el módulo sin la extensión '.ts'
+import { AuthGuard } from './guards/auth.guard'; // Importa el guard
 
 const routes: Routes = [
   {
@@ -26,11 +22,15 @@ const routes: Routes = [
   },
   {
     path: 'conductor-dashboard',
-    loadChildren: () => import('./conductor-dashboard/conductor-dashboard.module').then(m => m.ConductorDashboardModule)
+    loadChildren: () => import('./conductor-dashboard/conductor-dashboard.module').then(m => m.ConductorDashboardModule),
+    canActivate: [AuthGuard], // Aplica el guard aquí
+    data: { role: 'conductor' } // Especifica que solo conductores pueden acceder
   },
   {
     path: 'pasajero-dashboard',
-    loadChildren: () => import('./pasajero-dashboard/pasajero-dashboard.module').then(m => m.PasajeroDashboardModule)
+    loadChildren: () => import('./pasajero-dashboard/pasajero-dashboard.module').then(m => m.PasajeroDashboardModule),
+    canActivate: [AuthGuard], // Aplica el guard aquí
+    data: { role: 'pasajero' } // Especifica que solo pasajeros pueden acceder
   },
   {
     path: 'seleccion-auto',
@@ -52,3 +52,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
+

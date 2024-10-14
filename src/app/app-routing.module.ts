@@ -1,7 +1,5 @@
-// src/app/app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { PasajeroDashboardComponent } from './pasajero-dashboard/pasajero-dashboard.component';
 
 // Importa los módulos para las páginas
 import { ConductorDashboardModule } from './conductor-dashboard/conductor-dashboard.module';
@@ -37,9 +35,17 @@ const routes: Routes = [
   {
     path: 'seleccion-auto',
     loadChildren: () => import('./seleccion-auto/seleccion-auto.module').then(m => m.SeleccionAutoModule)
+  },
+  {
+    path: 'not-found',
+    loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundPageModule)
+  },
+  {
+    path: '**', // Cualquier ruta no definida
+    redirectTo: 'not-found',
+    pathMatch: 'full'
   }
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],

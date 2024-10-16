@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -9,6 +10,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SplashScreenModule } from './splash-screen/splash-screen.module';
+import { SQLite } from '@ionic-native/sqlite/ngx';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { SplashScreenModule } from './splash-screen/splash-screen.module';
     FormsModule // Asegúrate de incluir FormsModule
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    SQLite // Agregamos SQLite a los proveedores
   ],
   bootstrap: [AppComponent]
 })

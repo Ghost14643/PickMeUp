@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard'; // Importa el guard
+import { AuthGuard } from './guards/auth.guard'; 
 
 const routes: Routes = [
   {
@@ -29,12 +29,14 @@ const routes: Routes = [
   {
     path: 'pasajero-dashboard',
     loadChildren: () => import('./pasajero-dashboard/pasajero-dashboard.module').then(m => m.PasajeroDashboardModule),
-    canActivate: [AuthGuard], // Aplica el guard aquí
-    data: { role: 'pasajero' } // Especifica que solo pasajeros pueden acceder
+    canActivate: [AuthGuard], 
+    data: { role: 'pasajero' } 
   },
   {
     path: 'seleccion-auto',
-    loadChildren: () => import('./seleccion-auto/seleccion-auto.module').then(m => m.SeleccionAutoModule)
+    loadChildren: () => import('./seleccion-auto/seleccion-auto.module').then(m => m.SeleccionAutoModule),
+    canActivate: [AuthGuard], 
+    data: { role: 'pasajero' } 
   },
   {
     path: 'not-found',
@@ -52,4 +54,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
-

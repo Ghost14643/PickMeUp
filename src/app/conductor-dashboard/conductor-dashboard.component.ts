@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TripService } from '../services/trip.service';
 import { AuthService } from '../services/auth.service';
+import { Trip } from '../models/trip.model'; // Asegúrate de crear este modelo
 
 @Component({
   selector: 'app-conductor-dashboard',
@@ -9,13 +10,13 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./conductor-dashboard.component.scss']
 })
 export class ConductorDashboardComponent implements OnInit {
-  trips: any[] = [];
+  trips: Trip[] = []; // Usa el modelo Trip en lugar de any[]
   isLoading: boolean = false;
   error: string = '';
-  userName: string = ''; // Añadido para almacenar el nombre del usuario
+  userName: string = ''; // Para almacenar el nombre del usuario
 
   // Propiedades para el mapa
-  center: google.maps.LatLngLiteral = { lat: 0, lng: 0 }; // Ajusta según sea necesario
+  center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
   zoom: number = 8;
 
   constructor(
@@ -26,9 +27,9 @@ export class ConductorDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.loadTrips();
-    this.userName = localStorage.getItem('userName') || 'Invitado'; // Obtén el nombre del usuario del almacenamiento local
+    this.userName = localStorage.getItem('userName') || 'Invitado';
 
-    // Opcional: Configura la ubicación inicial del mapa si es necesario
+    // Configura la ubicación inicial del mapa
     this.setInitialMapLocation();
   }
 
@@ -41,6 +42,7 @@ export class ConductorDashboardComponent implements OnInit {
       },
       error: (err) => {
         this.error = 'No se pudo cargar la información de los viajes.';
+        console.error(err); // Log de error para mayor visibilidad
         this.isLoading = false;
       }
     });
@@ -55,13 +57,17 @@ export class ConductorDashboardComponent implements OnInit {
         };
         this.zoom = 12; // Ajusta el nivel de zoom si es necesario
       }, () => {
-        this.center = { lat: -41.469903, lng: -72.925592 }; // Ubicación de respaldo
+        this.setDefaultLocation(); // Llama a una función para establecer ubicación de respaldo
       });
     } else {
-      this.center = { lat: -41.469903, lng: -72.925592 }; // Ubicación de respaldo
+      this.setDefaultLocation(); // Llama a una función para establecer ubicación de respaldo
     }
   }
-  
+
+  setDefaultLocation() {
+    this.center = { lat: -41.469903, lng: -72.925592 }; // Ubicación de respaldo
+    this.zoom = 8; // Ajusta el zoom de respaldo si es necesario
+  }
 
   viewRoutes() {
     this.router.navigate(['/routes']);

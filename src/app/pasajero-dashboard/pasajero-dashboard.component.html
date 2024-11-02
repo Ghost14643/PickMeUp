@@ -1,7 +1,6 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <!-- Logo pequeño en el header -->
       <ion-img src="assets/icon/PickMeUpLogoP-removebg-preview.png" class="app-logo"></ion-img>
     </ion-buttons>
     <ion-title class="app-title">PickMeUp</ion-title>
@@ -36,17 +35,16 @@
 
   <!-- Mapa interactivo -->
   <div class="map-container" [ngClass]="{'loaded': mapLoaded}">
-    <google-map [center]="center" [zoom]="zoom" style="height: 100%; width: 100%;"></google-map>
+    <div id="map" [style.height.px]="400" [style.width.%]="100"></div> <!-- Añade un id para inicializar el mapa -->
   </div>
 
   <!-- Botón de acción rápida -->
-<div class="select-auto-button">
-  <ion-button expand="block" color="primary" class="styled-button" (click)="seleccionarAuto()">
-    Seleccionar Auto
-  </ion-button>
-  <ion-icon name="car-outline" class="car-icon"></ion-icon>
-</div>
-
+  <div class="select-auto-button">
+    <ion-button expand="block" color="primary" class="styled-button" (click)="seleccionarAuto()">
+      Seleccionar Auto
+    </ion-button>
+    <ion-icon name="car-outline" class="car-icon"></ion-icon>
+  </div>
 
   <!-- Estadísticas del usuario -->
   <ion-card>
@@ -62,7 +60,7 @@
                 <ion-card-title>Viajes Realizados</ion-card-title>
               </ion-card-header>
               <ion-card-content>
-                <p>35</p> <!-- Número de viajes realizados -->
+                <p>35</p>
               </ion-card-content>
             </ion-card>
           </ion-col>
@@ -72,7 +70,7 @@
                 <ion-card-title>Créditos Usados</ion-card-title>
               </ion-card-header>
               <ion-card-content>
-                <p>$12.000</p> <!-- Créditos de viaje usados -->
+                <p>$12.000</p>
               </ion-card-content>
             </ion-card>
           </ion-col>

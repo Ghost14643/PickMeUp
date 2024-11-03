@@ -32,6 +32,7 @@ export class ConductorDashboardComponent implements OnInit {
     // Configura la ubicación inicial del mapa
     this.setInitialMapLocation();
   }
+  
 
   loadTrips() {
     this.isLoading = true;
@@ -81,12 +82,11 @@ export class ConductorDashboardComponent implements OnInit {
   viewProfile() {
     this.router.navigate(['/profile']);
   }
-
   logout() {
-    // Elimina el nombre del usuario del almacenamiento local y realiza otras acciones necesarias para el cierre de sesión
+    // Limpiar la información de la sesión, por ejemplo:
     localStorage.removeItem('userName');
-    this.authService.logout().subscribe(() => {
-      this.router.navigate(['/login']);
-    });
+    // Redirigir a la página de inicio
+    this.router.navigate(['/home']); // Asegúrate de que esta ruta coincida con tu configuración de rutas
   }
+
 }

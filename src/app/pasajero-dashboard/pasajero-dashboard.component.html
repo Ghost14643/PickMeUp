@@ -85,18 +85,22 @@
   <ion-toolbar>
     <ion-tabs>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button (click)="viewProfile()">
-          <ion-icon name="person-circle-outline"></ion-icon>
-          <ion-label>Cuenta</ion-label>
-        </ion-tab-button>
-        <ion-tab-button (click)="viewHistory()">
-          <ion-icon name="time-outline"></ion-icon>
-          <ion-label>Historial</ion-label>
-        </ion-tab-button>
+        
+       
         <ion-tab-button (click)="requestRide()">
           <ion-icon name="car-outline"></ion-icon>
           <ion-label>Solicitar</ion-label>
         </ion-tab-button>
+        
+
+        <ion-button expand="full" (click)="logout()">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+          Cerrar Sesión
+        </ion-button>
+
+
+        
+        
       </ion-tab-bar>
     </ion-tabs>
   </ion-toolbar>

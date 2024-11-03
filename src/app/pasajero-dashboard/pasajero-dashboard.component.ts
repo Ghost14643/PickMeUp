@@ -31,6 +31,18 @@ export class PasajeroDashboardComponent implements AfterViewInit {
     }
   }
 
+  logout() {
+    // Limpiar la información de la sesión, por ejemplo:
+    localStorage.removeItem('userName');
+    // Redirigir a la página de inicio
+    this.router.navigate(['/home']); // Asegúrate de que esta ruta coincida con tu configuración de rutas
+  }
+  requestRide() {
+    console.log('Solicitar un viaje');
+    this.router.navigate(['/seleccion-auto']); // Navega a la ruta de SeleccionAutoComponent
+  }
+
+
   private initMap() {
     // Inicializa el mapa una vez que la API se haya cargado
     const mapElement = document.getElementById('map') as HTMLElement; // Asegúrate de tener un contenedor en tu HTML con este ID
@@ -105,9 +117,7 @@ export class PasajeroDashboardComponent implements AfterViewInit {
     console.log('Ver historial');
   }
 
-  requestRide() {
-    console.log('Solicitar un viaje');
-  }
+  
 
   private async geocodeAddress(address: string): Promise<{ lat: number, lng: number }> {
     try {

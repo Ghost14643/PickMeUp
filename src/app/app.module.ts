@@ -9,7 +9,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SplashScreenModule } from './splash-screen/splash-screen.module';
-import { IonicStorageModule } from '@ionic/storage-angular'; 
+import { IonicStorageModule } from '@ionic/storage-angular';
+import { RegistroComponent } from './registro/registro.component'; 
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { IonicStorageModule } from '@ionic/storage-angular';
     BrowserAnimationsModule,
     SplashScreenModule,
     FormsModule, // Asegúrate de incluir FormsModule
-    IonicStorageModule.forRoot() 
+    IonicStorageModule.forRoot()
+    
+     
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

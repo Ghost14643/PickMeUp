@@ -1,0 +1,142 @@
+/* Estilo general del contenido del registro */
+ion-content {
+  --background: #f0f0f5; /* Cambiado a un gris más suave para un contraste elegante */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  height: 100%;
+  overflow: hidden; 
+}
+
+/* Contenedor principal del registro */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 450px; /* Aumentado el ancho máximo para mayor espacio */
+  padding: 20px;
+  box-sizing: border-box;
+  opacity: 0; /* Comenzar oculto para animaciones */
+  transform: translateY(20px); /* Comenzar desplazado */
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-out;
+}
+
+/* Estilo del card del registro */
+ion-card {
+  width: 100%;
+  padding: 30px; /* Espacio adicional para mayor comodidad */
+  --background: rgba(255, 255, 255, 0.95); /* Blanco más opaco */
+  border-radius: 16px; /* Bordes más suaves */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilo del header del card */
+ion-card-header {
+  text-align: center;
+}
+
+/* Estilo del título del card */
+ion-card-title {
+  font-size: 1.8rem; /* Aumento del tamaño del texto para mejor legibilidad */
+  color: #3d3d3d; /* Color más suave para el texto */
+  margin-bottom: 20px; /* Espacio adicional debajo del título */
+}
+
+/* Estilo de los items dentro del card */
+ion-item {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Estilo del input */
+ion-input {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --placeholder-color: #bbb; /* Color de marcador de posición más claro */
+  --color: #333; /* Texto más oscuro para mayor contraste */
+  border: 1px solid #ccc; /* Añadir borde al input */
+  border-radius: 8px; /* Bordes redondeados en el input */
+}
+
+/* Estilo de las etiquetas del input */
+ion-label {
+  color: #777; /* Color más suave para las etiquetas */
+}
+
+/* Estilo del botón de registro */
+ion-button {
+  --background: #4a7c03; /* Color de fondo verde */
+  --color: #fff; 
+  border-radius: 50px; 
+  margin-top: 10px; 
+  padding: 12px 24px; /* Más espacio en el botón */
+  transition: background 0.3s ease, transform 0.2s ease; /* Añadir animación de transformación */
+}
+
+/* Efecto hover en el botón */
+ion-button:hover {
+  --background: #396a02; /* Color más oscuro al pasar el mouse */
+  transform: translateY(-2px); /* Leve elevación al pasar el mouse */
+}
+
+/* Estilo del mensaje de error */
+.error {
+  color: #e74c3c; /* Color rojo para mensajes de error */
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Estilo del footer */
+ion-footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 10px 0;
+  background: #f0f0f5; /* Mismo color que el fondo para cohesión */
+}
+
+/* Estilo del toolbar del footer */
+ion-toolbar {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Estilo de botón con icono */
+ion-button.icon-button {
+  --background: transparent; 
+  --color: #ffffff; 
+  display: flex; 
+  align-items: center; 
+}
+
+/* Icono dentro del botón */
+ion-icon {
+  font-size: 26px; /* Icono ligeramente más grande */
+  margin-right: 8px;
+}
+
+/* Clase para activar animaciones */
+.animated {
+  opacity: 1 !important; 
+  transform: translateY(0) !important; 
+}
+/* Estilo para el contenedor del logo */
+.logo-container {
+  display: flex;
+  justify-content: center; /* Centra el logo horizontalmente */
+  margin-bottom: 20px; /* Espacio debajo del logo */
+}
+
+/* Estilo para la imagen del logo */
+.app-logo {
+  width: 80%; /* Ajusta el tamaño del logo, puedes modificarlo según sea necesario */
+  max-width: 200px; /* Evita que el logo sea demasiado grande */
+  height: auto; /* Mantiene la proporción de la imagen */
+}

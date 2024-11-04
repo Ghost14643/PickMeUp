@@ -21,29 +21,34 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   {
+    path: 'register',  
+    loadChildren: () => import('./registro/registro.module').then(m => m.RegistroModule) // Asegúrate de que sea RegistroModule
+  },
+  
+  {
     path: 'conductor-dashboard',
     loadChildren: () => import('./conductor-dashboard/conductor-dashboard.module').then(m => m.ConductorDashboardModule),
-    canActivate: [AuthGuard], // Aplica el guard aquí
-    data: { role: 'conductor' } // Especifica que solo conductores pueden acceder
+    canActivate: [AuthGuard], 
+    data: { role: 'conductor' }
   },
   {
     path: 'pasajero-dashboard',
     loadChildren: () => import('./pasajero-dashboard/pasajero-dashboard.module').then(m => m.PasajeroDashboardModule),
     canActivate: [AuthGuard], 
-    data: { role: 'pasajero' } 
+    data: { role: 'pasajero' }
   },
   {
     path: 'seleccion-auto',
     loadChildren: () => import('./seleccion-auto/seleccion-auto.module').then(m => m.SeleccionAutoModule),
     canActivate: [AuthGuard], 
-    data: { role: 'pasajero' } 
+    data: { role: 'pasajero' }
   },
   {
     path: 'not-found',
     loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundPageModule)
   },
   {
-    path: '**', // Cualquier ruta no definida
+    path: '**', 
     redirectTo: 'not-found',
     pathMatch: 'full'
   }

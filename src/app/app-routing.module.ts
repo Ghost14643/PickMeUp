@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard'; 
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -22,33 +22,36 @@ const routes: Routes = [
   },
   {
     path: 'register',  
-    loadChildren: () => import('./registro/registro.module').then(m => m.RegistroModule) // Asegúrate de que sea RegistroModule
+    loadChildren: () => import('./registro/registro.module').then(m => m.RegistroModule) 
   },
-  
   {
     path: 'conductor-dashboard',
     loadChildren: () => import('./conductor-dashboard/conductor-dashboard.module').then(m => m.ConductorDashboardModule),
-    canActivate: [AuthGuard], 
+    canActivate: [AuthGuard],
     data: { role: 'conductor' }
   },
   {
     path: 'pasajero-dashboard',
     loadChildren: () => import('./pasajero-dashboard/pasajero-dashboard.module').then(m => m.PasajeroDashboardModule),
-    canActivate: [AuthGuard], 
+    canActivate: [AuthGuard],
     data: { role: 'pasajero' }
   },
   {
     path: 'seleccion-auto',
     loadChildren: () => import('./seleccion-auto/seleccion-auto.module').then(m => m.SeleccionAutoModule),
-    canActivate: [AuthGuard], 
+    canActivate: [AuthGuard],
     data: { role: 'pasajero' }
+  },
+  {
+    path: 'recuperacion',  // Asegúrate de que este módulo esté correctamente configurado
+    loadChildren: () => import('./recuperacion/recuperacion.module').then(m => m.RecuperacionModule)
   },
   {
     path: 'not-found',
     loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundPageModule)
   },
   {
-    path: '**', 
+    path: '**', // Esta ruta debe estar al final
     redirectTo: 'not-found',
     pathMatch: 'full'
   }

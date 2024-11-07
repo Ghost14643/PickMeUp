@@ -1,58 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
-interface RegistroResponse {
-  success: boolean;
-  name?: string;
-  message?: string;
-}
+import { AuthService } from '../services/auth.service'; // Asegúrate de que el servicio esté importado correctamente
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.css']
+  styleUrls: ['./registro.component.scss'],
 })
-export class RegistroComponent implements OnInit {
-  // Definimos el FormGroup para el formulario de registro
-  registroForm: FormGroup;
-  errorMessage: string | null = null; // Mensaje de error
-
-  // Inicializamos las propiedades
+export class RegistroComponent {
   nombre: string = '';
   correo: string = '';
   contrasena: string = '';
-  rol: string = '';
+  rol: string = 'pasajero'; // O 'conductor', dependiendo de lo que necesites
+  successMessage: string = '';
 
-  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {
-    this.registroForm = this.fb.group({
-      nombre: ['', [Validators.required]], // Validación del nombre
-      correo: ['', [Validators.required, Validators.email]], // Validación del correo
-      contrasena: ['', [Validators.required, Validators.minLength(4)]], // Validación de la contraseña
-      rol: ['', [Validators.required]] // Validación del rol
-    });
+  constructor(private authService: AuthService, private router: Router) {}
+
+  // Método que se llama cuando se envía el formulario
+  onRegister() {
+    this.authService.registrar(this.nombre, this.correo, this.contrasena, this.rol).subscribe(
+      (response) => {
+        if (response.success) {
+          this.successMessage = 'Registro exitoso';
+        } else {
+          this.successMessage = 'Hubo un problema al registrar al usuario';
+        }
+      },
+      (error) => {
+        console.error('Error en el registro:', error);
+        this.successMessage = 'Hubo un error, por favor intente nuevamente';
+      }
+    );
   }
 
-  ngOnInit(): void {}
-
-  // Método para manejar el registro
-  registrarse(): void {
-    if (this.registroForm.invalid) {
-      this.errorMessage = 'Por favor, completa el formulario correctamente.';
-      return;
-    }
-
-    const { nombre, correo, contrasena, rol } = this.registroForm.value;
-
-    this.authService.registrar(nombre, correo, contrasena, rol).subscribe((registroResponse: RegistroResponse) => {
-      if (registroResponse && registroResponse.success) {
-        console.log('Usuario registrado:', registroResponse.name);
-        this.router.navigate(['/dashboard']);
-      } else {
-        this.errorMessage = 'Error al registrar, por favor intenta de nuevo.';
-        console.error('Error en el registro:', registroResponse.message);
-      }
-    });
+  // Método para ir a la página de login
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
@@ -10,12 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SplashScreenModule } from './splash-screen/splash-screen.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { RegistroComponent } from './registro/registro.component'; 
+import { RecuperacionModule } from './recuperacion/recuperacion.module'; // Asegúrate de que la ruta sea correcta
+import { RegistroModule } from './registro/registro.module'; // Asegúrate de que la ruta sea correcta
 
 @NgModule({
   declarations: [
-    AppComponent,
-    
+    AppComponent, // Solo declaramos el componente principal
+    // Aquí eliminamos RegistroComponent y RecuperacionPage, ya que se declaran en sus respectivos módulos
   ],
   imports: [
     BrowserModule,
@@ -25,15 +26,15 @@ import { RegistroComponent } from './registro/registro.component';
     HttpClientModule,
     BrowserAnimationsModule,
     SplashScreenModule,
-    FormsModule, // Asegúrate de incluir FormsModule
+    FormsModule,
+    RecuperacionModule, // Importa el módulo de recuperación
+    RegistroModule, // Importa el módulo de registro
     IonicStorageModule.forRoot()
-    
-     
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]  // Agrega este esquema para manejar elementos personalizados
 })
 export class AppModule {}

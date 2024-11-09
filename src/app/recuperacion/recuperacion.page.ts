@@ -1,7 +1,9 @@
+//recuperacion.page.ts
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-recuperacion',
@@ -17,13 +19,16 @@ export class RecuperacionPage {
   codigoInvalido: boolean = false; // Bandera que indica si el código es incorrecto
   correoInvalido: boolean = false; // Bandera para mostrar error de correo inválido
 
+
   constructor(private authService: AuthService, private router: Router, private navCtrl: NavController) {}
+
 
   // Validación simple de correo
   validarCorreo(): boolean {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(this.correo);
   }
+
 
   // Simula el proceso de validación de correo
   simularEnvioCodigo() {
@@ -37,10 +42,12 @@ export class RecuperacionPage {
     }
   }
 
-  // Simula la recuperación de contraseña
+
+  // Método para la recuperación de contraseña
   recuperarContrasena() {
     if (this.codigo === this.codigoValido) {
-      // Lógica de éxito en la recuperación
+      // Guarda la nueva contraseña en el localStorage
+      localStorage.setItem('password', this.nuevaContrasena);
       alert('Contraseña cambiada correctamente');
       this.router.navigate(['/login']);  // Redirige al login después de la recuperación
     } else {
@@ -49,8 +56,11 @@ export class RecuperacionPage {
     }
   }
 
+
   // Función para volver atrás en la navegación
   volverAtras() {
     this.navCtrl.back();  // Regresa a la página anterior en el stack de navegación
   }
 }
+
+

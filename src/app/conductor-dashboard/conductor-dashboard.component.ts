@@ -1,10 +1,8 @@
-//conductor-dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TripService } from '../services/trip.service';
 import { AuthService } from '../services/auth.service';
 import { Trip } from '../models/trip.model';
-
 
 @Component({
   selector: 'app-conductor-dashboard',
@@ -17,11 +15,9 @@ export class ConductorDashboardComponent implements OnInit {
   error: string = '';
   userName: string = ''; // Para almacenar el nombre del usuario
 
-
   // Propiedades para el mapa
   center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
   zoom: number = 8;
-
 
   constructor(
     private router: Router,
@@ -29,16 +25,15 @@ export class ConductorDashboardComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-
   ngOnInit() {
     this.loadTrips();
     this.userName = localStorage.getItem('userName') || 'Invitado';
-
+    const password = localStorage.getItem('password'); // No es recomendable manejar contraseñas de esta manera
 
     // Configura la ubicación inicial del mapa
     this.setInitialMapLocation();
   }
- 
+
   loadTrips() {
     this.isLoading = true;
     this.tripService.getTrips().subscribe({
@@ -54,7 +49,6 @@ export class ConductorDashboardComponent implements OnInit {
       }
     });
   }
-
 
   setInitialMapLocation() {
     if (navigator.geolocation) {
@@ -72,28 +66,28 @@ export class ConductorDashboardComponent implements OnInit {
     }
   }
 
-
   setDefaultLocation() {
     this.center = { lat: -41.469903, lng: -72.925592 }; // Ubicación de respaldo
     this.zoom = 8; // Ajusta el zoom de respaldo si es necesario
   }
 
-
   viewRoutes() {
     this.router.navigate(['/routes']);
   }
-
 
   requestHelp() {
     // Lógica para solicitar ayuda
     console.log('Solicitar ayuda');
   }
 
-
   viewProfile() {
     this.router.navigate(['/profile']);
   }
 
+  editProfile() {
+    // Redirige a la página de edición de perfil
+    this.router.navigate(['/editar-perfil']);
+  }
 
   logout() {
     // Limpiar la información de la sesión, por ejemplo:
@@ -102,5 +96,3 @@ export class ConductorDashboardComponent implements OnInit {
     this.router.navigate(['/home']); // Asegúrate de que esta ruta coincida con tu configuración de rutas
   }
 }
-
-

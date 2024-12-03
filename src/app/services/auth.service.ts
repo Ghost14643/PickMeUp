@@ -107,7 +107,7 @@ export class AuthService {
     }
 
     // Buscar el índice del usuario con el correo proporcionado
-    const userIndex = usuariosRegistrados.findIndex((user: User) => user.email === localStorage.getItem('email'));
+    const userIndex = usuariosRegistrados.findIndex((user: User) => user.email === localStorage.getItem('userEmail'));
 
     // Si el usuario no se encuentra
     if (userIndex === -1) {
@@ -128,10 +128,37 @@ export class AuthService {
     return of({ success: true, name: nombre });
   }
 
+  // Método para cambiar la contraseña del usuario
+  cambiarContrasena(email: string, nuevaContrasena: string): Observable<any> {
+    // Obtener la lista de usuarios registrados desde localStorage
+    const usuariosRegistrados = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    
+    // Buscar al usuario que desea cambiar la contraseña
+    const userIndex = usuariosRegistrados.findIndex((user: User) => user.email === email);
+    
+    if (userIndex === -1) {
+      return of({ success: false, message: 'Usuario no encontrado' });
+    }
+    
+    // Actualizamos la contraseña del usuario
+    usuariosRegistrados[userIndex].password = nuevaContrasena;
+    
+    // Guardar los cambios en el localStorage
+    localStorage.setItem('registeredUsers', JSON.stringify(usuariosRegistrados));
+    
+    // También actualizamos la contraseña en el localStorage de la sesión activa
+    localStorage.setItem('userPassword', nuevaContrasena);
+    
+    console.log('Contraseña actualizada correctamente para el usuario:', email);
+    return of({ success: true, message: 'Contraseña actualizada con éxito' });
+  }
+
   // Método para limpiar el almacenamiento
   private clearStorage(): void {
     localStorage.removeItem('userName');
     localStorage.removeItem('userRole');
+    localStorage.removeItem('userEmail'); // Eliminar el email de la sesión
+    localStorage.removeItem('userPassword'); // Eliminar la contraseña de la sesión
   }
 
   // Método para validar la contraseña (al menos 6 caracteres)
